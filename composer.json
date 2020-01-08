@@ -1,0 +1,16 @@
+{
+    "name": "Celke",
+    "description": "Projeto PHP OO",
+    "authors": [
+        {
+            "name": "Cesar Szpak",
+            "email": "cesar@celke.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\" : "core"
+        }
+    },
+    "require": {}
+}
