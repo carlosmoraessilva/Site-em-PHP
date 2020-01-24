@@ -10,14 +10,20 @@ if (!defined('URL')) {
 /**
  * Description of SobreEmpresa
  *
- * @copyright (c) year, Cesar Szpak - Celke
+ * @copyright (c) year, Carlos Moraes 
  */
 class SobreEmpresa
 {
 
+    private $Dados;
+
     public function index()
     {
-        echo "Página Sobre Empresa <br>";
+        $listarSobEmp = new \Sts\Models\StsSobEmp();
+        $this->Dados['sts_sobs_emps'] = $listarSobEmp->listarSobEmp();
+        
+        $carregarView = new \Core\ConfigView('sts/Views/sobEmp/sobEmp', $this->Dados);
+        $carregarView->renderizar();
     }
 
 }
