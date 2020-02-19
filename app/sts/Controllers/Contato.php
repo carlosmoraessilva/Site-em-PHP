@@ -19,10 +19,31 @@ class Contato
 
     public function index()
     {
-        $this->Dados = ['nome' => 'Rodrigo', 'email' => 'rodrigo@gmail.com.br', 'assunto' => 'teste5', 'mensagem' => 'msg teste 1', 'created' => date('Y-m-d H:i:s')];
-        //var_dump($this->Dados);
-        $cadContato = new \Sts\Models\StsContato();
-        $cadContato->cadContato($this->Dados);
+        $this->Dados =  filter_input_array(INPUT_POST, FILTER_DEFAULT);
+       
+    
+      //  var_dump($this->Dados);
+        
+        if(!empty($this->Dados['CadMsgCont'])){
+            
+            unset($this->Dados['CadMsgCont']);
+            $cadContato = new \Sts\Models\StsContato();
+            $cadContato->cadContato($this->Dados);
+            if($cadContato->getResultado()){
+                $this->Dados['form'] = null;
+            }else{
+                  $this->Dados['form'] = $this->Dados;
+            }
+          
+            
+        }
+        
+        
+        
+   
+        $carregarView = new \Core\ConfigView('sts/Views/contato/contato', $this->Dados);
+        
+        $carregarView->renderizar();
     }
 
 }
