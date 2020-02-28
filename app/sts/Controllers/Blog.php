@@ -7,17 +7,19 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of Blog
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class Blog
 {
-
+    private $Dados;
+    
     public function index()
     {
-        echo "Página Blog <br>";
+        
+        $listar_art = new \Sts\Models\StsBlog();
+        $this->Dados['artigos'] = $listar_art->ListarArtigos();
+        
+        $carregarView = new \Core\ConfigView('sts/Views/blog/blog', $this->Dados);
+        $carregarView->renderizar();
     }
 
 }
